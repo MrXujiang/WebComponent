@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Component</title>
+</head>
+<body style="padding: 60px">
+  <h1>Web Component 实战 - 趣谈前端-徐小夕</h1>
+  <h2>1. Button</h2>
+  <xu-button type="primary"><span slot="btn-content" id="btn">趣谈button</span></xu-button>
+  <xu-button type="warning"><span slot="btn-content">趣谈button</span></xu-button>
+  <xu-button type="default"><span slot="btn-content">趣谈button</span></xu-button>
+  <h2>2. Modal</h2>
+  <xu-button type="primary"><span slot="btn-content" id="btn_show">显示弹窗</span></xu-button>
+  <xu-button><span slot="btn-content" id="btn_hide">关闭弹窗</span></xu-button>
+  <xu-modal title="趣谈前端" visible="false" id="modal"><div slot="modal-content">web component 实现一个有点意思的modal组件?</div></xu-modal>
+
+  <!-- template定义区 -->
+  <template id="btn_tpl">
+    <slot name="btn-content">button content</slot>
+  </template>
+  <template id="modal_tpl">
+    <style>
+      .modal-content {
+        padding: 16px;
+        font-size: 14px;
+        max-height: 800px;
+        overflow: scroll;
+      }
+    </style>
+    <div class="modal-content">
+      <slot name="modal-content">modal content</slot>
+    </div>
+  </template>
+  <script src="components/button.js"></script>
+  <script src="components/modal.js"></script>
+  <script>
+    let modal = document.querySelector('#modal');
+    document.querySelector('#btn_show').addEventListener('click', () => {
+      modal.setAttribute('visible', 'true');
+    }, false)
+    document.querySelector('#btn_hide').addEventListener('click', () => {
+      modal.setAttribute('visible', 'false');
+    }, false)
+  </script>
+</body>
+</html>
